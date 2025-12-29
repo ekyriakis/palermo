@@ -12,7 +12,7 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Export static web app
-RUN npx expo export --platform web --output dist
+RUN npx expo export --platform web
 
 # Production stage
 FROM node:20-alpine
@@ -22,8 +22,8 @@ WORKDIR /app
 # Install serve to serve the built files
 RUN npm install -g serve
 
-# Copy dist from builder
-COPY --from=builder /app/dist ./dist
+# Copy exported files from builder (expo exports to .expo/dist by default)
+COPY --from=builder /app/.expo/dist ./dist
 
 # Expose port
 EXPOSE 3000
