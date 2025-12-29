@@ -8,6 +8,9 @@
     "scheme": "nightinplaermo",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "experiments": {
+      "reactCompiler": false
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.elevkyri.nightinplaermo",
