@@ -14,5 +14,5 @@ COPY . .
 # Expose port for web
 EXPOSE 8081
 
-# Start Expo web server
-CMD ["npm", "start", "--", "--web"]
+# Start with --clear to clear Metro cache
+CMD ["sh", "-c", "npm start -- --web -- --clear"]
