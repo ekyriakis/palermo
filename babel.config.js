@@ -6,9 +6,13 @@ module.exports = function (api) {
         'babel-preset-expo',
         {
           jsxRuntime: 'automatic',
+          disableImportExportExtensionInterop: false,
         },
       ],
-      ['@babel/preset-react', { runtime: 'automatic', development: true }],
+    ],
+    plugins: [
+      // Disable React Compiler to avoid compatibility issues
+      ['babel-plugin-react-compiler', { disabled: true }],
     ],
   };
 };
