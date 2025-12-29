@@ -6,9 +6,9 @@ module.exports = function (api) {
         'babel-preset-expo',
         {
           jsxRuntime: 'automatic',
-          native: true,
         },
       ],
+      ['@babel/preset-react', { runtime: 'automatic', development: true }],
     ],
   };
 };
