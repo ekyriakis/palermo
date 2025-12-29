@@ -5,8 +5,6 @@ services:
     build: .
     ports:
       - "8081:8081"
-    environment:
-      - NODE_ENV=production
     restart: unless-stopped
     # Optional: add resource limits
     # mem_limit: 512m
