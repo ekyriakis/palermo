@@ -12,8 +12,9 @@ RUN npm ci
 # Copy app source
 COPY . .
 
-# Build for web
-RUN npm run web -- --build
+# Export web app for production
+RUN npm install -g expo-cli && \
+    npx expo export --platform web
 
 # Production stage
 FROM node:18-alpine
@@ -23,9 +24,7 @@ WORKDIR /app
 # Install serve to serve the static files
 RUN npm install -g serve
 
-# Copy only necessary files from builder
-COPY package*.json ./
-COPY --from=builder /app/.expo ./
+# Copy only the dist folder from builder
 COPY --from=builder /app/dist ./dist
 
 # Expose port
