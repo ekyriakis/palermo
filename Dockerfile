@@ -12,19 +12,22 @@ RUN npm install --legacy-peer-deps
 # Copy app source
 COPY . .
 
-# Production stage
+# Build static export for web
+RUN npm run web:build
+
+# Production stage - serve static files
 FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy installed dependencies from builder
-COPY --from=builder /app/node_modules ./node_modules
+# Install serve to run the static app
+RUN npm install -g serve
 
-# Copy app source
-COPY --from=builder /app . .
+# Copy built app from builder
+COPY --from=builder /app/dist ./dist
 
-# Expose port for web
+# Expose port
 EXPOSE 8081
 
-# Start Expo web with port binding
-CMD ["npm", "start", "--", "--web", "--host", "0.0.0.0", "--port", "8081"]
+# Serve the built app
+CMD ["serve", "-s", "dist", "-l", "8081"]
