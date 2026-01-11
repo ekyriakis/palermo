@@ -26,11 +26,11 @@ RUN npm install -g serve
 # Copy built app from builder - serve the client directory
 COPY --from=builder /app/dist/client ./public
 
-# Copy serve config for SPA routing
-COPY serve.json ./serve.json
+# Copy serve config into public directory for serve to find it
+COPY serve.json ./public/serve.json
 
 # Expose port
 EXPOSE 8081
 
 # Serve the built app from public directory with SPA routing
-CMD ["serve", "-c", "serve.json", "-s", "public", "-l", "8081"]
+CMD ["serve", "-c", "public/serve.json", "-s", "public", "-l", "8081"]
