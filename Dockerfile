@@ -23,11 +23,11 @@ WORKDIR /app
 # Install serve to run the static app
 RUN npm install -g serve
 
-# Copy built app from builder
-COPY --from=builder /app/dist ./dist
+# Copy built app from builder - serve the client directory
+COPY --from=builder /app/dist/client ./public
 
 # Expose port
 EXPOSE 8081
 
-# Serve the built app
-CMD ["serve", "-s", "dist", "-l", "8081"]
+# Serve the built app from public directory
+CMD ["serve", "-s", "public", "-l", "8081"]
