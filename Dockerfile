@@ -20,17 +20,14 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Install serve to run the static app
-RUN npm install -g serve
-
 # Copy built app from builder - serve the client directory
 COPY --from=builder /app/dist/client ./public
 
-# Copy serve config to /app root (where serve runs from)
-COPY serve.json ./serve.json
+# Copy custom server
+COPY server.js ./server.js
 
 # Expose port
 EXPOSE 8081
 
-# Serve the built app with config in working directory
-CMD ["serve", "-c", "./serve.json", "-s", "./public", "-l", "8081"]
+# Start custom Node server for proper SPA routing
+CMD ["node", "server.js"]
