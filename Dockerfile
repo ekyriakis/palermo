@@ -33,4 +33,4 @@ COPY serve.json ./public/serve.json
 EXPOSE 8081
 
 # Serve the built app from public directory with SPA routing
-CMD ["serve", "-c", "public/serve.json", "-s", "public", "-l", "8081"]
+CMD ["serve", "-c", "serve.json", "-s", "public", "-l", "8081"]
